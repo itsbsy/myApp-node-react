@@ -8,6 +8,15 @@ router.get('/', (req, res) =>{
 router.get('/users', async(req, res) =>{
     try {
         const users = await User.find();
+        if (typeof window !== "undefined" && typeof console !== "undefined") {
+            console.log("console on both....");
+          }
+        
+          // Log to the Node.js terminal if running in a Node.js environment
+          if (typeof window === "undefined" && typeof console !== "undefined") {
+            console.log("console on both....");
+          }
+        
         res.send(users)
         
     } catch (error) {
