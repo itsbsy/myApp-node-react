@@ -1,10 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../model/users')
+const User = require('../model/users');
+const { join } = require('node:path');
 
-router.get('/', (req, res) =>{
-    res.send("hello ")
+router.get('/socket', (req, res) =>{
+    res.sendFile(join(__dirname, '../index.html'));
   })
+  
+
 router.get('/users', async(req, res) =>{
     try {
         const users = await User.find();
