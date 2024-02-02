@@ -2,17 +2,18 @@
 <html lang="en">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>We chat</title>
+  <title>We Chat</title>
   <style>
     body {
       margin: 0;
       padding-bottom: 3rem;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f2f2f2;
-      background-image: url('bg.webp'); /* Replace with your image path */
+      background-image: url('bg.webp'); 
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+      color: #5b5b5b;
     }
 
     #messages {
@@ -25,20 +26,20 @@
 
     #messages > li {
       padding: 1rem;
-      border-radius: 10px;
+      border-radius: 15px;
       margin-bottom: 1rem;
-      background-color: #fff;
+      background-color: #ffffff;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      display: block;
-      max-width: 70%;
+      display: flex; 
+      width: fit-content;
     }
 
     #messages > li:nth-child(odd) {
-      background-color: #f2f2f2;
+      background-color: #f5e7ba;
     }
 
     #form {
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.0); /* Transparent background */
       padding: 1rem;
       position: fixed;
       bottom: 0;
@@ -47,12 +48,12 @@
       display: flex;
       align-items: center;
       box-sizing: border-box;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(1px);
     }
 
     #input {
       border: none;
-      padding: 0.5rem;
+      padding: 0.75rem;
       flex-grow: 1;
       border-radius: 5px;
       margin-right: 0.5rem;
@@ -67,7 +68,7 @@
     #form > button {
       background: #3498db;
       border: none;
-      padding: 0.5rem 1rem;
+      padding: 0.75rem 1.5rem;
       border-radius: 5px;
       outline: none;
       color: #fff;
