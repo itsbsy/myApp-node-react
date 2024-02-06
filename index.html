@@ -25,7 +25,7 @@
     
     }
 
-    #messages > li {
+    #messages > li, div#rightText > li{
       padding: 1rem;
       border-radius: 15px;
       margin-bottom: 1rem;
@@ -75,6 +75,7 @@
     #form > button:hover {
       background: #2980b9;
     }
+
   </style>
 </head>
 
@@ -105,15 +106,20 @@
     socket.on('chat message', (msg) => {
       const item = document.createElement('li');
       if(userName == msg.name){
-        item.style.position ="relative";
-        item.style.left = "85%";
         item.style.backgroundColor = "#f5e7ba";
-        item.innerHTML = `<strong style = "color : blue">${msg.name}</strong><br/><p>${msg.message}</p>`;
+        item.innerHTML = `<strong style = "color : blue">${msg.name}</strong><br/>${msg.message}`;
+        const div  = document.createElement('div');
+        div.id = "rightText"
+        div.style.display = "flex";
+        div.style.justifyContent = "flex-end";
+        div.append(item)
+        messages.appendChild(div);
       }
       else{
       item.innerHTML = `<strong style = "color : blue ">${msg.name}</strong><br/>${msg.message}`;
-      }
       messages.appendChild(item);
+      }
+      
       window.scrollTo(0, document.body.scrollHeight);
     });
   </script>
