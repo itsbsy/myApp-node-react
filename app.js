@@ -8,7 +8,7 @@ const { createServer } = require('http');
 const app = express();
 const server = createServer(app);
 const io = new Server(server);
-const path = require("path")
+const path = require("path");
 
 app.use(bodyParser.json());
 
@@ -19,14 +19,19 @@ server.listen(port, ()=> {
 )
 app.use(express.static(path.join(__dirname, 'images')))
 io.on('connection', (socket) => {
-  console.log('a user connected', socket.id);
+
+  // Set a name for the socket
+  socket.on('set-name', (username) => {
+    socket.name = username;
+    console.log(`User ${username} connected`);
+  });
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
 });
 io.on('connection', (socket) => {
-  socket.on('chat message', (msg) => {
-    io.emit('chat message', msg);
+  socket.on('chat message', (msg, username) => {
+    io.emit('chat message',  { name: username, message: msg });
   });
 });
 app.use('/', mainRoutes);

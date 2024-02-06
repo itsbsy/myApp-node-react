@@ -22,6 +22,7 @@
       padding: 1rem;
       overflow-y: scroll;
       height: 70vh;
+    
     }
 
     #messages > li {
@@ -30,12 +31,7 @@
       margin-bottom: 1rem;
       background-color: #ffffff;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      display: flex; 
       width: fit-content;
-    }
-
-    #messages > li:nth-child(odd) {
-      background-color: #f5e7ba;
     }
 
     #form {
@@ -92,6 +88,8 @@
   <script src="/socket.io/socket.io.js"></script>
   <script>
     const socket = io();
+    const userName =  window.prompt('Enter your name:');
+    socket.emit('set-name', userName);
     const form = document.getElementById('form');
     const input = document.getElementById('input');
     const messages = document.getElementById('messages');
@@ -99,14 +97,22 @@
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       if (input.value) {
-        socket.emit('chat message', input.value);
+        socket.emit('chat message', input.value, userName);
         input.value = '';
       }
     });
 
     socket.on('chat message', (msg) => {
       const item = document.createElement('li');
-      item.textContent = msg;
+      if(userName == msg.name){
+        item.style.position ="relative";
+        item.style.left = "85%";
+        item.style.backgroundColor = "#f5e7ba";
+        item.innerHTML = `<strong style = "color : blue">${msg.name}</strong><br/><p>${msg.message}</p>`;
+      }
+      else{
+      item.innerHTML = `<strong style = "color : blue ">${msg.name}</strong><br/>${msg.message}`;
+      }
       messages.appendChild(item);
       window.scrollTo(0, document.body.scrollHeight);
     });
